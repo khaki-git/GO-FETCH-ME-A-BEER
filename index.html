@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SpaBeers</title>
+    <style>
+        body {
+            background-image: url("cdn/beers.jpg");
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            font-size: 1em;
+            color: #333;
+        }
+
+        div {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            width: 60%;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        select {
+            font-size: 1.2em;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 80%;
+            border-radius: 5px;
+            border: 2px solid #ccc;
+            background-color: #fff;
+        }
+
+        button {
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.5em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:active {
+            background-color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label for="beverage">Choose Your Beverage:</label>
+        <select name="beverage" id="beverage">
+            <option value="beer">Super Dry 3.5 Beer</option>
+            <option value="mango">Mango + Pineapple Boozy Seltzer</option>
+            <option value="water">Water</option>
+            <option value="coke">Coke</option>
+        </select>
+        <button id="order">Order</button>
+    </div>
+
+    <script defer>
+        let order_but = document.getElementById("order");
+        let beverage = document.getElementById("beverage");
+
+        order_but.addEventListener("click", function() {
+            console.log("CLICKED");
+            fetch("/api/order", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    order: beverage.value
+                }),
+            });
+        });
+    </script>
+</body>
+</html>
